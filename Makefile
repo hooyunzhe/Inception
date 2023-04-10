@@ -4,12 +4,21 @@ COMPOSE_FILE	= docker-compose.yml
 DOCKER			= docker
 COMPOSE			= docker-compose
 
+MKDIR			= mkdir -p
+
+MDB_VOLUME_DIR	= /Users/hyun-zhe/data/mariadb
+WP_VOLUME_DIR	= /Users/hyun-zhe/data/wordpress
+
 COMPOSE_FLAGS	= -f
 UP_FLAGS		= -d --build
+# UP_FLAGS		= --build
 DOWN_FLAGS		= --rmi all
 
-all:
+all:	volumes
 	$(COMPOSE) $(COMPOSE_FLAGS) $(SRCS)/$(COMPOSE_FILE) up $(UP_FLAGS)
+
+volumes:
+	$(MKDIR) $(MDB_VOLUME_DIR) $(WP_VOLUME_DIR)
 
 show:
 	$(COMPOSE) $(COMPOSE_FLAGS) $(SRCS)/$(COMPOSE_FILE) ps

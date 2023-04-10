@@ -7,3 +7,11 @@ services:
           - 443:443
         build:
             context: requirements/nginx
+        volumes:
+          - /Users/hyun-zhe/data/wordpress:/usr/share/nginx/wordpress
+    wordpress:
+        image: wordpress:buster
+        build:
+            context: requirements/wordpress
+        volumes:
+          - /Users/hyun-zhe/data/wordpress:/usr/share/wordpress
