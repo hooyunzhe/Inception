@@ -4,19 +4,21 @@ COMPOSE_FILE	= docker-compose.yml
 DOCKER			= docker
 COMPOSE			= docker-compose
 
+COMPOSE_FLAGS	= -f
 UP_FLAGS		= -d --build
+DOWN_FLAGS		= --rmi all
 
 all:
-	$(COMPOSE) -f $(SRCS)/$(COMPOSE_FILE) up $(UP_FLAGS)
+	$(COMPOSE) $(COMPOSE_FLAGS) $(SRCS)/$(COMPOSE_FILE) up $(UP_FLAGS)
 
 show:
-	$(COMPOSE) -f $(SRCS)/$(COMPOSE_FILE) ps
+	$(COMPOSE) $(COMPOSE_FLAGS) $(SRCS)/$(COMPOSE_FILE) ps
 
 images:
 	$(DOCKER) images
 
 clean:
-	$(COMPOSE) -f $(SRCS)/$(COMPOSE_FILE) down
+	$(COMPOSE) $(COMPOSE_FLAGS) $(SRCS)/$(COMPOSE_FILE) down $(DOWN_FLAGS)
 
 fclean:	clean
 	$(DOCKER) system prune -f
