@@ -10,8 +10,8 @@ MDB_VOLUME_DIR	= /Users/hyun-zhe/data/mariadb
 WP_VOLUME_DIR	= /Users/hyun-zhe/data/wordpress
 
 COMPOSE_FLAGS	= -f
-# UP_FLAGS		= -d --build
-UP_FLAGS		= --build
+UP_FLAGS		= -d --build
+# UP_FLAGS		= --build
 DOWN_FLAGS		= --rmi all --remove-orphans
 
 all:	volumes

@@ -8,18 +8,20 @@ services:
     #     build:
     #         context: requirements/nginx
     #     volumes:
-    #       - /Users/hyun-zhe/data/wordpress:/usr/share/nginx/wordpress
-    # wordpress:
-    #     container_name: wordpress
-    #     build:
-    #         context: requirements/wordpress
-    #     volumes:
-    #       - /Users/hyun-zhe/data/wordpress:/usr/share/wordpress
-    mariadb:
-        container_name: mariadb
+    #       - /Users/hyun-zhe/data/wordpress:/var/www/html
+    wordpress:
+        container_name: wordpress
         build:
-            context: requirements/mariadb
+            context: requirements/wordpress
         env_file:
           - .env
         volumes:
-          - /Users/hyun-zhe/data/mariadb:/usr/share/mariadb
+          - /Users/hyun-zhe/data/wordpress:/var/www/html
+    # mariadb:
+    #     container_name: mariadb
+    #     build:
+    #         context: requirements/mariadb
+    #     env_file:
+    #       - .env
+    #     volumes:
+    #       - /Users/hyun-zhe/data/mariadb:/var/lib/mysql

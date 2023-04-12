@@ -5,5 +5,5 @@ COPY ./ ./
 RUN apt update
 RUN apt install mariadb-server expect -y
 
-RUN chmod +x /tools/start.sh
-# CMD ["./tools/start.sh"]
+RUN chmod +x /tools/setup.sh
+CMD ["/tools/setup.sh"]

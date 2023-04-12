@@ -5,11 +5,10 @@ COPY ./ ./
 RUN apt update
 RUN apt install php-fpm wget -y
 
-RUN service php7.3-fpm start
+WORKDIR /var/www/html
 
-RUN cd /tmp
 RUN wget https://wordpress.org/latest.tar.gz
 RUN tar -zxvf latest.tar.gz
 
-RUN chmod +x /tools/start.sh
-CMD ["./tools/start.sh"]
+RUN chmod +x /tools/setup.sh
+CMD ["/tools/setup.sh"]
