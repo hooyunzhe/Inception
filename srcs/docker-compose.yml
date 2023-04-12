@@ -1,14 +1,14 @@
 version: "3"
 
 services:
-    # nginx:
-    #     container_name: nginx
-    #     ports:
-    #       - 443:443
-    #     build:
-    #         context: requirements/nginx
-    #     volumes:
-    #       - /Users/hyun-zhe/data/wordpress:/var/www/html
+    nginx:
+        container_name: nginx
+        build:
+            context: requirements/nginx
+        volumes:
+          - /Users/hyun-zhe/data/wordpress:/var/www/html
+        ports:
+          - "443:443"
     wordpress:
         container_name: wordpress
         build:
@@ -17,11 +17,15 @@ services:
           - .env
         volumes:
           - /Users/hyun-zhe/data/wordpress:/var/www/html
-    # mariadb:
-    #     container_name: mariadb
-    #     build:
-    #         context: requirements/mariadb
-    #     env_file:
-    #       - .env
-    #     volumes:
-    #       - /Users/hyun-zhe/data/mariadb:/var/lib/mysql
+        expose:
+          - "9000"
+    mariadb:
+        container_name: mariadb
+        build:
+            context: requirements/mariadb
+        env_file:
+          - .env
+        volumes:
+          - /Users/hyun-zhe/data/mariadb:/var/lib/mysql
+        expose:
+          - "3306"
