@@ -1,7 +1,7 @@
 FROM debian:buster
 
 RUN apt update
-RUN apt install php-fpm wget -y
+RUN apt install php-fpm php-mysql wget -y
 
 WORKDIR /var/www/html
 
