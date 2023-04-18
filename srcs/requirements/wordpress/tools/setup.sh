@@ -3,7 +3,7 @@
 chown -R www-data:www-data /var/www/html
 chmod -R 755 /var/www/html
 
-if [-f "/var/www/html/wp-config.php"]
+if [ -f "/var/www/html/wp-config.php" ]
 then
 	echo "Wordpress has already been installed!"
 else

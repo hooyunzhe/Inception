@@ -8,6 +8,7 @@ services:
         volumes:
           - /Users/hyun-zhe/data/wordpress:/var/www/html
         ports:
+          - "80:80"
           - "443:443"
     wordpress:
         container_name: wordpress
