@@ -30,5 +30,9 @@ clean:
 
 fclean:	clean
 	$(DOCKER) system prune -f
+	rm -rf /Users/hyun-zhe/data/mariadb/*
+	rm -rf /Users/hyun-zhe/data/wordpress/*
+
+re:	fclean all
 
 .PHONY:	all show clean fclean

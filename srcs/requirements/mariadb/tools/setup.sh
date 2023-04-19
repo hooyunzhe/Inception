@@ -18,7 +18,7 @@ else
 	CREATE USER '$MYSQL_USER'@'localhost' IDENTIFIED BY '$MYSQL_USER_PASSWORD';
 	FLUSH PRIVILEGES;" > /tools/init.sql
 
-	sed -i s/127.0.0.1/0.0.0.0/ /etc/mysql/mariadb.conf.d/50-server.cnf
+	sed -i s/127.0.0.1/mariadb/ /etc/mysql/mariadb.conf.d/50-server.cnf
 
 	mysql_install_db --user=mysql > /dev/null
 	mysqld --user=mysql --bootstrap < /tools/init.sql
