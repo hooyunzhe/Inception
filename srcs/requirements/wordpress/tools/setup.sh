@@ -23,4 +23,4 @@ sed -i s/\\/run\\/php\\/php7\\.3-fpm\\.sock/9000/ /etc/php/7.3/fpm/pool.d/www.co
 
 mkdir -p /run/php
 
-/usr/sbin/php-fpm7.3 -F -R
+exec $@

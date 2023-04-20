@@ -3,30 +3,58 @@ version: "3"
 services:
     nginx:
         container_name: nginx
-        build:
-            context: requirements/nginx
+        build: ./requirements/nginx
+        depends_on:
+          - wordpress
+        restart: on-failure
         volumes:
-          - /Users/hyun-zhe/data/wordpress:/var/www/html
+          - website:/var/www/html
         ports:
           - "80:80"
           - "443:443"
+        networks:
+          - inception
     wordpress:
         container_name: wordpress
-        build:
-            context: requirements/wordpress
+        build: ./requirements/wordpress
+        depends_on:
+          - mariadb
+        restart: on-failure
         env_file:
           - .env
         volumes:
-          - /Users/hyun-zhe/data/wordpress:/var/www/html
+          - website:/var/www/html
         expose:
           - "9000"
+        networks:
+          - inception
     mariadb:
         container_name: mariadb
-        build:
-            context: requirements/mariadb
+        build: ./requirements/mariadb
+        restart: on-failure
         env_file:
           - .env
         volumes:
-          - /Users/hyun-zhe/data/mariadb:/var/lib/mysql
+          - database:/var/lib/mysql
         expose:
           - "3306"
+        networks:
+          - inception
+
+volumes:
+    database:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /Users/hyun-zhe/data/mariadb
+    website:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /Users/hyun-zhe/data/wordpress
+
+networks:
+    inception:
+        driver: bridge

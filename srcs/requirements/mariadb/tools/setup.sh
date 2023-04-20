@@ -23,4 +23,5 @@ else
 	mysql_install_db --user=mysql > /dev/null
 	mysqld --user=mysql --bootstrap < /tools/init.sql
 fi
-	mysqld_safe
+
+exec $@
