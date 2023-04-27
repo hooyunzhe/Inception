@@ -68,6 +68,15 @@ services:
           - "42000-42042:42000-42042"
         networks:
           - inception
+    static:
+        container_name: static
+        build: ./requirements/bonus/static
+        image: static:inception
+        restart: on-failure
+        ports:
+          - "4242:4242"
+        networks:
+          - inception
 
 volumes:
     database:

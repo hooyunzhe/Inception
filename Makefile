@@ -4,20 +4,12 @@ COMPOSE_FILE	= docker-compose.yml
 DOCKER			= docker
 COMPOSE			= docker-compose
 
-MKDIR			= mkdir -p
-
-MDB_VOLUME_DIR	= /Users/hyun-zhe/data/mariadb
-WP_VOLUME_DIR	= /Users/hyun-zhe/data/wordpress
-
 COMPOSE_FLAGS	= -f
 UP_FLAGS		= -d --build
 DOWN_FLAGS		= --rmi all --remove-orphans
 
-all:	volumes
+all:
 	$(COMPOSE) $(COMPOSE_FLAGS) $(SRCS)/$(COMPOSE_FILE) up $(UP_FLAGS)
-
-volumes:
-	$(MKDIR) $(MDB_VOLUME_DIR) $(WP_VOLUME_DIR)
 
 show:
 	$(COMPOSE) $(COMPOSE_FLAGS) $(SRCS)/$(COMPOSE_FILE) ps
@@ -30,8 +22,10 @@ clean:
 
 fclean:	clean
 	$(DOCKER) system prune -f
-	rm -rf /Users/hyun-zhe/data/mariadb/*
-	rm -rf /Users/hyun-zhe/data/wordpress/*
+	$(DOCKER) volume rm srcs_database
+	$(DOCKER) volume rm srcs_website
+	rm -rf $(HOME)/data/mariadb/*
+	rm -rf $(HOME)/data/wordpress/*
 
 re:	fclean all
 
