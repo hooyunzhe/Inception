@@ -1,7 +1,7 @@
 #!/bin/sh
 
-useradd $FTP_USER
-echo -e "$FTP_PASSWORD\n$FTP_PASSWORD" | passwd $FTP_USER
+adduser $FTP_USER
+echo "$FTP_USER:$FTP_PASSWORD" | chpasswd
 chown -R $FTP_USER:$FTP_USER /var/www/html
 
 mkdir -p /var/ftp/empty

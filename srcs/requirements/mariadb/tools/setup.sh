@@ -17,10 +17,10 @@ else
 	GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_ADMIN'@'%' IDENTIFIED BY '$MYSQL_ADMIN_PASSWORD';
 	FLUSH PRIVILEGES;" > /tools/init.sql
 
-	sed -i s/127.0.0.1/mariadb/ /etc/mysql/mariadb.conf.d/50-server.cnf
-
 	mysql_install_db --user=mysql > /dev/null
 	mysqld --user=mysql --bootstrap < /tools/init.sql
 fi
+
+sed -i s/127.0.0.1/mariadb/ /etc/mysql/mariadb.conf.d/50-server.cnf
 
 exec $@
